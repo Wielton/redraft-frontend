@@ -22,7 +22,7 @@
                                             <v-spacer></v-spacer>
                                             <v-col class="d-flex" cols="2" sm="3" xsm="3" align-end>
                                                 <v-card-actions>
-                                                <v-btn large block color="success" @click="managerSignin(loginEmail,loginPassword)">{{loginTitle}}</v-btn>
+                                                <v-btn large block color="success" @click="handleManagerLogin">{{loginTitle}}</v-btn>
                                                 </v-card-actions>
                                             </v-col>
                                         </v-row>
@@ -55,7 +55,7 @@
                                             <v-spacer></v-spacer>
                                             <v-col class="d-flex" cols="3" sm="3" xsm="3" align-end>
                                                 <v-card-actions>
-                                                <v-btn large block color="success" @click="createManager(email,username,password,firstName,lastName)">{{registerTitle}}</v-btn>
+                                                <v-btn large block color="success" @click="handleManagerRegistration">{{registerTitle}}</v-btn>
                                                 </v-card-actions>
                                             </v-col>
                                         </v-row>
@@ -73,17 +73,25 @@
 <script>
 import {useManagerLoginStore} from '@/stores/managerLogin';
 import {useManagerStore} from '@/stores/manager'
-import {mapActions,mapState} from 'pinia';
+import {mapActions} from 'pinia';
 
     export default {
     name: 'RegistrationComponent',
     computed: {
-        ...mapState(useManagerLoginStore, ['loginTitle'])
     },
     methods: {
         ...mapActions(useManagerStore, ['createManager']),
         ...mapActions(useManagerLoginStore, ['managerSignin']),
         
+        handleManagerRegistration(){
+            this.createManager(this.email, this.username, this.firstName, this.lastName , this.password, this.pictureUrl);
+        },
+        handleManagerLogin() {
+            this.managerSignin(this.loginEmail, this.loginPassword);
+        },
+        handleError(response){
+            console.log(response);
+        }
         // validate() {
         // if (this.$refs.loginForm.validate()) {
         //     // submit form to server/API here...
@@ -97,7 +105,26 @@ import {mapActions,mapState} from 'pinia';
         // this.$refs.form.resetValidation();
         // }
     },
+    // mounted () {
+    //     useManagerStore().$onAction(({name, after})=>{
+    //         if (name == "userRegisterAlert"){
+    //             console.log("handling");
+    //             after((response)=>{
+    //                 this.handleError(response);
+    //             })
+    //         }
+    //     }),
+    //     useManagerLoginStore().$onAction(({name, after})=>{
+    //         if (name == "userRegisterAlert"){
+    //             console.log("handling");
+    //             after((response)=>{
+    //                 this.handleError(response);
+    //             })
+    //         }
+    //     })
+    // },
     data: () => ({
+        loginTitle: 'Login',
         registerTitle: "Register",
         toolbarTitle: "reDraft",
         firstName: "",
@@ -122,3 +149,6 @@ import {mapActions,mapState} from 'pinia';
     
     };
 </script>
+
+
+    

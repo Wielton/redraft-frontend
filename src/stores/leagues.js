@@ -5,11 +5,9 @@ import axios from 'axios';
 
 export const useLeagueStore = defineStore('leagues',{
     state : ()=>({
-        title: "Leagues",
-        joinTitle: "Join League",
-        createTitle: "Create A League",
+        
         leagueList : [],
-        inviteKey : ""
+        inviteKey : String
     }),
     
     actions: {

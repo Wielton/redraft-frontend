@@ -25,7 +25,7 @@
                                 {{player.ovrRank}} -->
                             </div>
                             <v-card-actions>
-                                <v-btn class="success" @click="popPlayer(player.playerId),addToRosterDB(player.playerId)">Add</v-btn>
+                                <v-btn class="success" @click="popPlayer(player.playerId),handleAddPlayerToDB">Add</v-btn>
                             </v-card-actions>
                         </div>
                     </v-card-title>
@@ -44,28 +44,33 @@ export default {
         
         data(){
             return{
-                
+                title1: "AVAILABLE PLAYERS", 
             }
         },
         computed: {
-            ...mapState(usePlayersStore, ['title1','playerList']),
-            
-            
+            ...mapState(usePlayersStore, ['playerList']),
         },
         methods: {
-            // ...mapActions(useRosterStore, ['addPlayer']),
+            
             ...mapActions(useRosterStore, ['addToRosterDB']),
             ...mapActions(usePlayersStore, ['fetchPlayers']),
+            
             popPlayer(player){
                 for (let i = 0; i < this.playerList.length; i++){
                     if (this.playerList[i] == player){
                         this.playerList.splice(i, 1)
                     }
                         return this.playerList;
-
-        }
-    },
+                        }
+            },
+            handleAddPlayerToDB(){
+            //Some kind of form validation
+            this.addToRosterDB(this.player.playerId);
         },
+        },
+        mounted() {
+            this.fetchPlayers();
+        }
             }
 </script>
 

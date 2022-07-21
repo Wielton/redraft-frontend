@@ -33,8 +33,8 @@ export default {
             links: [
                 {name: 'Signup/Login', path: '/registration/'},
                 {name: 'Leagues', path: '/league-portal/'},
-                {name: 'Rosters', path: '/league-portal/league/'},
-                {name: 'Draftboard', path: '/league-portal/league/draft-board/'}
+                {name: 'Rosters', path: '/league/'},
+                {name: 'Draftboard', path: '/draftboard/'}
     ]
         };
     }

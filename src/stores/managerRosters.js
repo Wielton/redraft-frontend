@@ -5,7 +5,7 @@ import axios from "axios";
 
 export const useManagerRosterStore = defineStore('managerRosters',{
     state : ()=>({
-        leagueRostersTitle: "LEAGUE ROSTERS",
+        
         allManagerRosters : []
     }),
     // getters: {

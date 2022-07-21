@@ -5,7 +5,6 @@ import axios from 'axios';
 
 export const usePlayersStore = defineStore('players',{
     state : ()=>({
-        title1: "AVAILABLE PLAYERS",
         playerList : []
     }),
     

@@ -36,10 +36,11 @@ export default {
         data(){
             return{
                 
+        rosterTitle: "ROSTER",
             }
         },
         computed: {
-            ...mapState(useRosterStore, ['rosterTitle','managersRoster']),
+            ...mapState(useRosterStore, ['managersRoster']),
             
             
         },

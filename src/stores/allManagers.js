@@ -6,7 +6,6 @@ import cookies from 'vue-cookies';
 export const useAllManagersStore = defineStore('allManagers',{
     state : () => {
         return{
-            leagueRostersTitle: "LEAGUE ROSTERS",
             allManagers : []
         }   
         

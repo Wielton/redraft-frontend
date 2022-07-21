@@ -6,7 +6,6 @@ import cookies from 'vue-cookies';
 
 export const useRosterStore = defineStore('roster',{
     state : ()=>({
-        rosterTitle: "ROSTER",
         managersRoster : []
     }),
     // getters: {
@@ -41,7 +40,7 @@ export const useRosterStore = defineStore('roster',{
                 },
                 
             }).then((response)=>{
-                this.managerRoster = response.data;
+                this.managersRoster = response.data;
                 console.log(response);
             }).catch((error)=>{
                 console.log(error)

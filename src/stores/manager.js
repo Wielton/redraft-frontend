@@ -29,8 +29,12 @@ export const useManagerStore = defineStore('manager',{
                 console.log(cookies.get('sessionToken'));
                 router.push('/league-portal/');
             }).catch((error)=>{
-                console.log(error.response.data);
+                console.log(error);
+                this.userRegisterAlert(error.response);
             })
+        },
+        userRegisterAlert(error){
+            return (error)
         }
         
     },

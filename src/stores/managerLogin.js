@@ -7,11 +7,10 @@ import {router} from '@/router'
 export const useManagerLoginStore = defineStore('managerlogin',{
     state : () => {
         return{
-            loginTitle: "Login"
         }   
     },
     actions: {
-        async managerSignin(loginEmail, loginPassword){
+        managerSignin(loginEmail, loginPassword){
             axios.request({
                 url:process.env.VUE_APP_API_URL+"manager-login",
                 method : "POST",
@@ -25,6 +24,7 @@ export const useManagerLoginStore = defineStore('managerlogin',{
                 router.push('/league-portal/');
             }).catch((error)=>{
                 console.log(error);
+                this.userRegisterAlert(error.response);
             })
         },
         managerLogout(){
@@ -39,6 +39,9 @@ export const useManagerLoginStore = defineStore('managerlogin',{
                 console.log(error);
             })
         },
+        userRegisterAlert(error){
+            return (error)
+        }
         
     },
     

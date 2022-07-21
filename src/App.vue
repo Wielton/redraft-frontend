@@ -16,7 +16,7 @@
             <v-toolbar-title class="hidden-md-and-up green--text">{{appBarTitle}}</v-toolbar-title>
             <v-btn class="hidden-sm-and-down green--text" @click="drawer = !drawer">Menu</v-btn>
             <v-spacer></v-spacer>
-            <v-btn v-if="isLoggedIn" class="green--text" @click="managerLogout">LOGOUT</v-btn>
+            <v-btn class="green--text" @click="managerLogout">LOGOUT</v-btn>
         </v-app-bar>
       <v-main>
         <v-container>
@@ -29,7 +29,7 @@
 
 <script>
 import {useManagerLoginStore} from '@/stores/managerLogin'
-import {mapActions,mapState} from 'pinia'
+import {mapActions} from 'pinia'
 export default {
   name: 'App',
   
@@ -42,15 +42,12 @@ export default {
     links: [
             {name: 'Home', path: '/'},
             {name: 'Leagues', path: '/league-portal/'},
-            {name: 'Draftboard', path: '/draft-board/'},
+            {name: 'Draftboard', path: '/draftboard/'},
             {name: 'Login', path: '/registration/'}
           ],
   }),
   methods: {
     ...mapActions(useManagerLoginStore, ['managerLogout'])
-  },
-  computed: {
-    ...mapState(useManagerLoginStore, ['isLoggedIn'])
   }
 };
 </script>
