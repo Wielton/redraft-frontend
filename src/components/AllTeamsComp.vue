@@ -4,12 +4,12 @@
         <v-list>
             {{leagueRostersTitle}}
         <v-list-group
-            v-for="manager in allManagers"
+            v-for="manager in allManagersList"
             :key="manager.managerId"
             :manager="manager"
             no-action>
                 <template v-slot:activator>
-                    <v-list-item-content @click="handleGetAllRosters">
+                    <v-list-item-content @click="handleGetAllRosters(manager.managerId)">
                         <v-list-item-title>{{manager.username}}</v-list-item-title>
                     </v-list-item-content>
                 </template>
@@ -41,7 +41,7 @@ export default {
             }
         },
         computed: {
-            ...mapState(useAllManagersStore, ['allManagers']),
+            ...mapState(useAllManagersStore, ['allManagersList']),
             ...mapState(useManagerRosterStore, ['allManagerRosters'])
             
         },
@@ -49,14 +49,14 @@ export default {
             ...mapActions(useManagerRosterStore, ['getAllManagerRosters']),
             ...mapActions(useAllManagersStore, ['getAllManagers']),
             
-            handleGetAllRosters() {
-            this.getAllManagerRosters(this.manager.managerId);
+            handleGetAllRosters(managerId) {
+            this.getAllManagerRosters(managerId);
+        },
+        
         },
         mounted() {
             this.getAllManagers();
         }
-        },
-        
         
             }
 </script>

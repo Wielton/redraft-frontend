@@ -11,18 +11,19 @@
                         <div>
                             <h3 class="headline mb-0">{{player.playerId}}</h3>
                             <v-spacer></v-spacer>
-                            <!-- <v-img
+                            <v-img
                                 height="50"
                                 width="50"
                                 :src="`${player.logoUrl}`"
-                                ></v-img> -->
+                                ></v-img>
                         </div>
                         <v-divider></v-divider>
                         <div>
                             <div>
-                                <!-- {{player.position}}
+                                {{player.name}}
+                                {{player.position}}
                                 {{player.team}}
-                                {{player.ovrRank}} -->
+                                {{player.ovrRank}}
                             </div>
                             <v-card-actions>
                                 <v-btn class="success" @click="popPlayer(player.playerId),handleAddPlayerToDB">Add</v-btn>

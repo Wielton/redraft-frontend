@@ -6,7 +6,7 @@ import cookies from 'vue-cookies';
 export const useAllManagersStore = defineStore('allManagers',{
     state : () => {
         return{
-            allManagers : []
+            allManagersList : []
         }   
         
     },
@@ -20,7 +20,7 @@ export const useAllManagersStore = defineStore('allManagers',{
                     'sessionToken' : cookies.get('sessionToken')
                 }
             }).then((response)=>{
-                this.allManagers = response.data;
+                this.allManagersList = response.data;
             }).catch((error)=>{
                 console.log(error);
             })
