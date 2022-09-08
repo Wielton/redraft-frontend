@@ -1,24 +1,8 @@
 # redraft-mvp
 
-## Project setup
-```
-npm install
-```
+Fantasy Football league web app
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+Created using VueJS, Vuetify, vue-router, Pinia, and Axios calls to Python/Flask on the backend.
 
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+Users can signup/login, create/join a league, and add/drop players. 
+Currently, recreating in React.js and designing drafting sequence in backend.
