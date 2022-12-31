@@ -1,42 +1,20 @@
 <template>
-<v-container app>
+<v-container app fluid>
     <v-row>
-            <v-col
-            cols="12"
-            sm="4"
-            >
-            <v-sheet
-                rounded="lg"
-                min-height="268"
-                >
+        <v-col
+            cols="12">
                 <DraftRosterComp/>
-                </v-sheet>
-            </v-col>
-
-            <v-col
+        </v-col>
+        <!-- <v-col
             cols="12"
-            sm="4"
             >
-            <v-sheet
-                rounded="lg"
-                min-height="268"
-                >
                 <AllTeamsComp/>
-            </v-sheet>
-            </v-col>
-            <v-col
-            cols="12"
-            sm="4"
-            >
+        </v-col> -->
+        <v-col
+            cols="12">
                 
-                <v-sheet
-                id="scrolling-techniques-4"
-                class="overflow-y-auto"
-                rounded="lg"
-                max-height="600"
-                >
                 <RawPlayerDataListComp/>
-                </v-sheet>
+                
             </v-col>
         </v-row>
 </v-container>
@@ -46,7 +24,7 @@
 <script>
 import DraftRosterComp from '@/components/DraftRosterComp.vue'
 import RawPlayerDataListComp from '@/components/RawPlayerDataListComp.vue'
-import AllTeamsComp from '@/components/AllTeamsComp.vue'
+// import AllTeamsComp from '@/components/AllTeamsComp.vue'
 // import RosterComp from '@/components/RosterComp.vue'
 
 
@@ -57,7 +35,7 @@ export default {
         components: {
                 RawPlayerDataListComp,
                 DraftRosterComp,
-                AllTeamsComp
+                // AllTeamsComp
                 // RosterComp
             
         },

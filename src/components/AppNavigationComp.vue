@@ -1,45 +1,75 @@
 <template>
-    <div>
-        <v-navigation-drawer app v-model="drawer" class="#383838" dark disable-resize-watcher>
-            <v-list>
-                <template v-for="(link, index) in links">
-                    <v-list-item :key="index">
-                            <router-link :to="link.path" tag="button">{{link.name}}</router-link>
-                    </v-list-item>
-                    <v-divider :key="`divider-${index}`"></v-divider>
-                </template>
-            </v-list>
-        </v-navigation-drawer>
-        <v-app-bar app color="grey darken-4" dark>
-            <v-app-bar-nav-icon class="hidden-md-and-up green--text" @click="drawer = !drawer"></v-app-bar-nav-icon>
-            <v-spacer class="hidden-md-and-up"></v-spacer>
-            <v-toolbar-title class="hidden-md-and-up green--text">{{appTitle}}</v-toolbar-title>
-            <v-btn class="hidden-sm-and-down green--text">Menu</v-btn>
-            <v-spacer class="hidden-sm-and-down green--text"></v-spacer>
-            <v-btn class="hidden-sm-and-down green--text" v-model="dialog" @click="dialog = !dialog">LOGIN/JOIN</v-btn>
+<div>
+    <v-app-bar app color="transparent" elevation="0" hide-on-scroll>
+        <h1 class="green--text">{{appBarTitle}}</h1>
+        <v-spacer></v-spacer>
+        <v-tabs
+            right
+            class="hidden-sm-and-down tabs"
+            hide-slider
+            color="green">
+                <v-tab
+                v-for="(link, index) in navLinks"
+                :key="index"
+                class="tab-links">
+                <router-link :to="link.path">{{link.name}}</router-link>
+                </v-tab>
+                </v-tabs>
+            <v-btn
+                    @click="drawer = !drawer"
+                    style="background-color: transparent"
+                    max-width="50"
+                    elevation="0"
+                    class="hidden-md-and-up"
+                    >
+                    <span class="material-symbols-outlined">menu</span>
+                    
+                </v-btn>
+            
         </v-app-bar>
-        
-    </div>
+        <v-navigation-drawer app v-model="drawer" class="#383838" dark disable-resize-watcher height="fit-content">
+            <v-list v-for="(link, index) in navLinks" :key="index">
+            <v-list-item >
+                <router-link :to="({name: link.path})" class="button">{{link.name}}</router-link>
+            </v-list-item>
+            </v-list>
+            <v-btn v-if="isAuthenticated" class="green--text" @click="managerLogout" rounded small>LOGOUT</v-btn>
+        </v-navigation-drawer>
+</div>
 </template>
 
 <script>
+import {useManagerLoginStore} from '@/stores/managerLogin'
+import {useAuthStore} from '@/stores/authStore'
+import {mapActions, mapState} from 'pinia'
 export default {
-    name: 'AppNavigationComponent',
-    data() {
-        return {
-            dialog: false,
-            appTitle: 'reDraft Fantasy Football',
-            drawer: false,
-            links: [
-                {name: 'Signup/Login', path: '/registration/'},
-                {name: 'Leagues', path: '/league-portal/'},
-                {name: 'Rosters', path: '/league/'},
-                {name: 'Draftboard', path: '/draftboard/'}
-    ]
-        };
-    }
+    name: 'AppNavigationComp',
+    
+    components: {
+        },
+    data: () => ({
+        appBarTitle: "reDraft",
+        dialog: false,
+        drawer: false,
+        navLinks: [
+                {name: 'Home', path: 'landing'},
+                {name: 'Leagues', path: 'league-portal'},
+                {name: 'Draftboard', path: 'draftboard'},
+                {name: 'Login', path: 'login'},
+
+            ],
+    }),
+    computed: {
+        ...mapState(useAuthStore, ['isAuthenticated'])
+    },
+    methods: {
+        ...mapActions(useManagerLoginStore, ['managerLogout'])
+    },
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+*a {
+    text-decoration: none;
+}
 </style>

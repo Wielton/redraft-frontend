@@ -1,77 +1,68 @@
 <template>
-    <v-container app>
-    <v-layout row wrap>
-            <v-flex xs12 sm12 md12 lg12>
-                <h1>{{title1}}</h1>
-                <v-divider></v-divider>
-                <v-card v-for="player in playerList"
-                        :key="player.playerId"
-                        :player="player">
-                    <v-card-title primary-title>
-                        <div>
-                            <h3 class="headline mb-0">{{player.playerId}}</h3>
-                            <v-spacer></v-spacer>
-                            <v-img
-                                height="50"
-                                width="50"
-                                :src="`${player.logoUrl}`"
-                                ></v-img>
-                        </div>
-                        <v-divider></v-divider>
-                        <div>
-                            <div>
-                                {{player.name}}
-                                {{player.position}}
-                                {{player.team}}
-                                {{player.ovrRank}}
-                            </div>
-                            <v-card-actions>
-                                <v-btn class="success" @click="popPlayer(player.playerId),handleAddPlayerToDB">Add</v-btn>
-                            </v-card-actions>
-                        </div>
-                    </v-card-title>
-                </v-card>
-            </v-flex>
-    </v-layout>
-</v-container>
+    <v-data-iterator
+        :items="playerList"
+        :itemsPerPage="itemsPerPage"
+        >
+        <template v-slot:default="{items}">
+        <v-list three-line>
+                <v-list-item v-for="player in items" :key="player.playerId" :player="player">
+                    <v-list-item-avatar>
+                        <v-img :src="`${player.logoUrl}`">
+                        </v-img>
+                    </v-list-item-avatar>
+                    <v-list-item-content>
+                        <v-list-item-title>{{ player.name }}</v-list-item-title>
+                        <v-list-item-subtitle>{{ player.position }}</v-list-item-subtitle>
+                        <v-list-item-subtitle>{{ player.team }}</v-list-item-subtitle>
+                        <v-list-item-subtitle>{{ player.ovrRank }}</v-list-item-subtitle>
+
+                    </v-list-item-content>
+                    <v-list-item-action>
+                        <v-btn class="success" @click="popPlayer(player.playerId), handleAddPlayerToDB">Add</v-btn>
+                    </v-list-item-action>
+                </v-list-item>
+        </v-list>
+    </template>
+    </v-data-iterator>
 </template>
 
 <script>
-import {mapState,mapActions} from 'pinia'
-import {usePlayersStore} from '@/stores/draftList'
-import {useRosterStore} from '@/stores/roster'
+import { mapState, mapActions } from 'pinia'
+import { usePlayersStore } from '@/stores/draftList'
+import { useRosterStore } from '@/stores/roster'
 export default {
-        name: 'PlayerListComponent',
-        
-        data(){
-            return{
-                title1: "AVAILABLE PLAYERS", 
+    name: 'PlayerListComponent',
+
+    data() {
+        return {
+            title1: "AVAILABLE PLAYERS",
+            itemsPerPage: 5,
+        }
+    },
+    computed: {
+        ...mapState(usePlayersStore, ['playerList']),
+    },
+    methods: {
+
+        ...mapActions(useRosterStore, ['addToRosterDB']),
+        ...mapActions(usePlayersStore, ['fetchPlayers']),
+
+        popPlayer(player) {
+            for (let i = 0; i < this.playerList.length; i++) {
+                if (this.playerList[i] == player) {
+                    this.playerList.splice(i, 1)
+                }
+                return this.playerList;
             }
         },
-        computed: {
-            ...mapState(usePlayersStore, ['playerList']),
-        },
-        methods: {
-            
-            ...mapActions(useRosterStore, ['addToRosterDB']),
-            ...mapActions(usePlayersStore, ['fetchPlayers']),
-            
-            popPlayer(player){
-                for (let i = 0; i < this.playerList.length; i++){
-                    if (this.playerList[i] == player){
-                        this.playerList.splice(i, 1)
-                    }
-                        return this.playerList;
-                        }
-            },
-            handleAddPlayerToDB(){
+        handleAddPlayerToDB() {
             //Some kind of form validation
             this.addToRosterDB(this.player.playerId);
         },
-        },
-        mounted() {
-            this.fetchPlayers();
-        }
-            }
+    },
+    mounted() {
+        this.fetchPlayers();
+    }
+}
 </script>
 

@@ -20,7 +20,7 @@ export const useLeagueStore = defineStore('leagues',{
             }
         }).then((response)=>{
             this.leagueList = response.data;
-            console.log(response)
+            console.log(response.data)
         }).catch((error)=>{
             console.log(error)
         })

@@ -18,7 +18,7 @@ export const useManagerRosterStore = defineStore('managerRosters',{
     // },
     actions: {
         
-        getAllManagerRosters(managerId){
+        async getAllManagerRosters(managerId){
             axios.request({
                 url: process.env.VUE_APP_API_URL+"all-manager-rosters",
                 method : "GET",

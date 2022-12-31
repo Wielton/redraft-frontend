@@ -17,14 +17,21 @@ export const useRosterStore = defineStore('roster',{
         
     // },
     actions: {
+        // Add player to roster in database
+        // if position vacant then push player into roster
+        // else if position is filled then do not push
+        // return new roster
         addToRosterDB(playerId){
             axios.request({
                 url : process.env.VUE_APP_API_URL+"rosters",
                 method : "POST",
                 params: {
                     'sessionToken' : cookies.get('sessionToken'),
-                    playerId
+                    
                 },
+                data: {
+                    playerId
+                }
             }).then((response)=>{
                 console.log(response)
             }).catch((error)=>{
@@ -51,8 +58,7 @@ export const useRosterStore = defineStore('roster',{
         // addPlayer(name,position){
         //     // iterate through rosters
         //     for (let i = 0;i < this.rosters.length; i++){
-        //     // if position vacant then push player into roster
-        //     // else if position is filled then do not push
+        //     
         //     // Once the rosters are all filled out and the draft is complete, 
         //     // iterate through the roster and insert into DB one-by-one
         //         if (position == "QB" && this.rosters.QB.position == null) {

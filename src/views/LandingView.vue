@@ -1,12 +1,16 @@
 <template>
-    <div app>
-        <div>
-        <HeroComponent />
-        </div>
-        <div>
-        <LandingContentComponent />
-        </div>
-    </div>
+    <v-container app>
+        <v-row>
+            <v-col cols="12">
+                <HeroComponent />
+            </v-col>
+        </v-row>
+        <v-row>
+            <v-col cols="12">
+                <LandingContentComponent />
+            </v-col>
+        </v-row>
+    </v-container>
 </template>
 
 <script>

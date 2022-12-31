@@ -1,18 +1,23 @@
 <template>
-    <v-card app>
-        <v-list>
-            {{title}}
-            <v-list-item 
-                v-for="player in rosters"
-                :key="player.name"
-                :player="player"
-                >
-                {{player.name}}
-                {{player.position}}
-                {{player.team}}
-                </v-list-item>
-        </v-list>
-    </v-card>
+    <v-container fluid app>
+        <v-row>
+            <v-col cols="12">
+                <v-list
+                    v-for="player in rosters"
+                    :key="player.name"
+                    :player="player">
+                    {{title}}
+                    <v-list-item 
+                        
+                        >
+                        {{player.name}}
+                        {{player.position}}
+                        {{player.team}}
+                        </v-list-item>
+                </v-list>
+            </v-col>
+        </v-row>
+    </v-container>
 </template>
 
 <script>
